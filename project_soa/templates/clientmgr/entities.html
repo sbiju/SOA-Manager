@@ -1,0 +1,56 @@
+{% extends "dashboard_adviser.html" %}
+
+{% block content %}
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    
+    <div class="page-header">
+        <h1>Adviser Dashboard</h1>
+    </div>       
+      
+    <br />
+    <div class="sub-header">        
+        <div class="btn-group pull-right">
+            <a href="{% url 'clientmgr:client_create' %}" class="btn btn-success">Add Entity</a>
+        </div>  
+        <h2>Entities</h2>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Entity ID</th>
+                    <th>Entity Name</th>
+                    <th>Description</th>
+                    <th>Entity Type</th>
+                    <th>Details</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entity in entities %}
+                    <tr>
+                        <td>{{ entity.id }}</td>
+                        <td>{{ entity.xplanID }}</td>
+                        <td>{{ entity.name }}</td>
+                        <td>{{ entity.description }}</td>
+                        <td>{{ entity.entType }}</td>
+                        <td>                               
+                            <a href="{% url 'clientmgr:entity_update' entity.pk %}" class="btn btn-primary">
+                                Detail
+                            </a>
+                        </td>
+                        <td>                               
+                            <a href="{% url 'clientmgr:entity_delete' entity.pk %}" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-off" area-hidden="true"></span>
+                            </a>
+                        </td>
+                        {% empty %}
+                        <td colspan="4">You have no entities yet, please add one.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>        
+</div>
+{% endblock content %}

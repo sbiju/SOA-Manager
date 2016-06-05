@@ -1,0 +1,42 @@
+{% extends "dashboard_adviser.html" %}
+{% load crispy_forms_tags %}
+{% block title %}Create Order{% endblock %}
+
+{% block content %}
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <div class="page-header">
+            <h1>Order Detail</h1>
+    </div>
+        <div class="container-fluid">
+            <div class="row">
+                    <div class="table-responsive">
+                        <table class="table">
+                             <thead>
+                                <tr>
+                                    <th>CLIENT NAME</th>
+                                    <th>PARTNER NAME</th>
+                                    <th>SMSF</th>
+                                    <th>TRUST FUND</th>
+                                    <th>COMPANY NAME</th>
+                                    <th>INSIDE SUPER</th>
+                                    <th>OUTSIDE SUPER</th>
+                                </tr>
+                            </thead>
+                            <tr>
+                                <td>{{ object.client.fullName }}</td>
+                                <td>{{ object.partner_name }}</td>
+                                <td>{{ object.smsf }}</td>
+                                <td>{{ object.trust_fund }}</td>
+                                <td>{{ object.company }}</td>
+                                <td>{{ object.inside_super }}</td>
+                                <td>{{ object.outside_super }}</td>
+                            </tr>
+                        </table>
+                        <hr/>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+{% endblock content %}

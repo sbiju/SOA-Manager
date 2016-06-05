@@ -1,0 +1,28 @@
+{% extends "dashboard_qpp.html" %}
+
+{% block title %}Add Formatting{% endblock %}
+{% block content %}
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <div class="page-header">        
+        <div class="btn-group pull-right">
+            <a href="#"> 
+                <button type="submit" class="btn btn-success">Fetch Data</button>
+            </a>
+            <a href="{% url 'tempmgr:formattings' %}"> 
+                <button type="submit" class="btn btn-success">Save</button>
+            </a>
+        </div> 
+        <h1>Add Formatting</h1>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-md-7">
+                <form class="form-horizontal" method="post" action="" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% include 'form_template.html' %}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

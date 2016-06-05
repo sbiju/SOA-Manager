@@ -1,0 +1,116 @@
+{% extends "dashboard_qpp.html" %}
+
+{% block content %}
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">    
+    <div class="page-header">
+        <h1>QPP Admin Dashboard</h1>
+    </div>       
+    <div class="sub-header">   
+        <div class="btn-group pull-right">
+            <a href="{% url 'soamgr:qppadmin_soatype_create' %}"> 
+                <button type="submit" class="btn btn-success">Add Soa Type</button>
+            </a>
+        </div>  
+        <h2>Soa Types</h2>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Type of Soa</th>
+                    <th>Guaranteed Time</th>
+                    <th>Paraplanner Time</th>
+                    <th>Soa Cost (ex GST)</th>
+                    <th>Paraplanner Fee (ex GST)</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for soatype in soatypes %}
+                    <tr>
+                        <td>{{ soatype.type_name }}</td>
+                        <td>{{ soatype.guaranteed_time }}</td>
+                        <td>{{ soatype.paraplanner_time }}</td>
+                        <td>{{ soatype.cost }}</td>
+                        <td>{{ soatype.paraplanner_cost }}</td>
+                        <td>                               
+                            <a href="{% url 'soamgr:qppadmin_soatype_update' soatype.pk %}" class="btn btn-primary">
+                                Edit
+                            </a>
+                        </td>
+                        {% empty %}
+                        <td colspan="4">You have no soa types yet, please add one.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>        
+    <div class="sub-header">          
+        <h2>Strategies</h2>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Strategy Name</th>
+                    <th>Description</th>
+                    <th>Parent</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for strategy in strategies %}
+                    <tr>
+                        <td>{{ strategy.stratID }}</td>
+                        <td>{{ strategy.strat_name }}</td>
+                        <td>{{ strategy.description }}</td>
+                        <td>{{ strategy.parent }}</td>
+                        <td class="pull-right">                               
+                            <a href="#" class="btn btn-primary">
+                                Edit
+                            </a>
+                        </td>
+                        {% empty %}
+                        <td colspan="4">You have no strategies added yet, please contact the developer for this.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>     
+       
+    <div class="sub-header">         
+        <h2>Client Objectives</h2>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>CO Name</th>
+                    <th>Description</th>
+                    <th>Parent</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for goal in goals %}
+                    <tr>
+                        <td>{{ goal.id }}</td>
+                        <td>{{ goal.goal_name }}</td>
+                        <td>{{ goal.description }}</td>
+                        <td>{{ goal.parent }}</td>
+                        <td class="pull-right">                           
+                            <a href="#" class="btn btn-primary">
+                                Edit
+                            </a>
+                        </td>
+                        {% empty %}
+                        <td colspan="4">You have no goals added yet, please contact the developer for this.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>        
+</div>
+{% endblock content %}

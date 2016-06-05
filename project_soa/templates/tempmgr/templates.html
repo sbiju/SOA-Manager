@@ -1,0 +1,105 @@
+{% extends "dashboard_qpp.html" %}
+
+{% block content %}
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">    
+    <div class="page-header">
+        <h1>QPP Admin Dashboard</h1>
+    </div>       
+    <div class="sub-header">        
+        <div class="btn-group pull-right">
+            <a href="{% url 'tempmgr:template_create' %}"> 
+                <button type="submit" class="btn btn-success">Add Template</button>
+            </a>
+        </div>  
+        <h2>Templates</h2>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Template ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <!--
+                    <th>Has Partner</th>
+                    <th>Has Entity</th>
+                    -->
+                    <th>Details</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for template in templates %}
+                    <tr>
+                        <td>{{ template.pk }}</td>
+                        <td>{{ template.tempID }}</td>
+                        <td>{{ template.name }}</td>
+                        <td>{{ template.description }}</td>
+                        <td>                               
+                            <a href="{% url 'tempmgr:template_update' template.pk %}" class="btn btn-primary">
+                                Details
+                            </a>
+                        </td>
+                        <td>                               
+                            <a href="{% url 'tempmgr:template_delete' template.pk %}" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-off" area-hidden="true"></span>
+                            </a>
+                        </td>
+                        {% empty %}
+                        <td colspan="4">You have no templates yet, please add one.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>        
+    <div class="sub-header">        
+        <div class="btn-group pull-right">
+            <a href="{% url 'tempmgr:formatting_create' %}"> 
+                <button type="submit" class="btn btn-success">Add Formatting</button>
+            </a>
+        </div>  
+        <h2>Formatting</h2>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Formatting ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <!--
+                    <th>Has Partner</th>
+                    <th>Has Entity</th>
+                    -->
+                    <th>Details</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for formatting in formattings %}
+                    <tr>
+                        <td>{{ formatting.pk }}</td>
+                        <td>{{ formatting.tempID }}</td>
+                        <td>{{ formatting.name }}</td>
+                        <td>{{ formatting.description }}</td>
+                        <td>                               
+                            <a href="{% url 'tempmgr:formatting_update' formatting.pk %}" class="btn btn-primary">
+                                Details
+                            </a>
+                        </td>
+                        <td>                               
+                            <a href="{% url 'tempmgr:formatting_delete' formatting.pk %}" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-off" area-hidden="true"></span>
+                            </a>
+                        </td>
+                        {% empty %}
+                        <td colspan="4">You have no formatting sets yet, please add one.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>        
+</div>
+{% endblock content %}

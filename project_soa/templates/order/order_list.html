@@ -1,0 +1,39 @@
+{% extends "dashboard_adviser.html" %}
+{% load crispy_forms_tags %}
+{% block title %}Create Order{% endblock %}
+
+{% block content %}
+<div class="col-sm-10 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <div class="page-header">
+            <h1>Order History</h1>
+    </div>
+        <div class="container-fluid">
+            <div class="row">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>CLIENT NAME</th>
+                                        <th>TIME CREATED</th>
+                                         <th>CREATED by</th>
+                                    </tr>
+                                </thead>
+                             {% for order in object_list %}
+                                <tr>
+                                     <td><a href="{{ order.get_absolute_url }}">{{ order.client.fullName }}</a></td>
+                                     <td>{{ order.timestamp | timesince }} ago ({{ order.timestamp }})</td>
+                                     <td>{{ user }}</td>
+                                        {% empty %}
+                                        <h3>No orders yet.</h3>
+                                </tr>
+                           {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+{% endblock content %}
+
+

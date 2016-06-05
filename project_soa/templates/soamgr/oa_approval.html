@@ -1,0 +1,38 @@
+{% extends 'dashboard_adviser.html' %}
+
+{% block content %}
+    
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <form method="post" action="{% url 'soamgr:qppadmin_orderapproval' current_oa.id %}">
+            {% csrf_token %}
+            <h1>Review OA</h1>
+            <h6><strong>SOA ID:</strong> {{ current_oa.id }}</h6>
+            <h6><strong>Name of Client:</strong> {{ current_oa.client_name }}</h6>
+            <h6><strong>SOA Type:</strong> {{ current_oa.soa_type }}</h6>
+            <h6><strong>Cost:</strong> {{ current_oa.cost }}</h6>
+            
+            <input type="hidden" value="{{ current_oa.id }}" name="oa-id" />
+            <div class="radio">
+                <label>
+                <input type="radio" name="approval-choice" value="1" checked>
+                    Approve OA
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                <input type="radio" name="approval-choice" value="2">
+                    Approve OA when changes will be made
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                <input type="radio" name="approval-choice" value="2">
+                    OA requires changes
+                </label>
+            </div>
+    
+            <button type="submit" class="btn btn-primary">Submit</button>
+    
+        </form>
+    </div>
+{% endblock content %}

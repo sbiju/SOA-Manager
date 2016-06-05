@@ -1,0 +1,198 @@
+{% extends "dashboard_qpp.html" %}
+
+{% block content %}
+    
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        
+        <h1 class="page-header">QPP Admin Dashboard</h1>
+        
+        <h2 class="sub-header">Orders Received</h2>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Client Name</th>
+                        <th>Date Received</th>
+                        <th>Status</th>
+                        <th class="pull-right">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for oa in oas_received %}
+                        <tr>
+                            <td>{{ oa.id }}</td>
+                            <td>{{ oa.client_name }}</td>
+                            <td>{{ oa.date_created }}</td>
+                            <td>{{ oa.status }}</td>
+                            <td class="pull-right">
+                                <a href="{% url 'soamgr:qppadmin_orderapproval' oa.id %}" class="btn btn-primary">
+                                    Review OA
+                                </a>
+                            </td>
+                            {% empty %}
+                            <td colspan="5">No data available</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <h2 class="sub-header">Orders in Progress</h2>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Client Name</th>
+                        <th>Date Ordered</th>
+                        <td>Date Due</td>
+                        <th>Status</th>
+                        <th class="pull-right">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for oa in oas_inprogress %}
+                        <tr>
+                            <td>{{ oa.id }}</td>
+                            <td>{{ oa.client_name }}</td>
+                            <td>{{ oa.date_created }}</td>
+                            <td>{{ oa.date_due }}</td>
+                            <td>{{ oa.status }}</td>
+                            <td class="pull-right">
+                                <a href="{% url 'soamgr:qppadmin_orderapproval' oa.id %}" class="btn btn-primary">
+                                    Review OA
+                                </a>
+                                <a href="#" class="btn btn-primary">
+                                    Post Job
+                                </a>
+                            </td>
+                            {% empty %}
+                            <td colspan="5">No data available</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+        {% if soas_claimed %}
+            <h2 class="sub-header">Job Queue</h2>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Client Name</th>
+                            <th>Soa Type</th>
+                            <th>Date Due</th>
+                            <th>Status</th>
+                            <th>Progress</th>
+                            <th class="pull-right">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for soa in soas_claimed %}
+                            <tr>
+                                <td>{{ soa.id }}</td>
+                                <td>{{ soa.client_name }}</td>
+                                <td>{{ soa.soa_type }}</td>
+                                <td>{{ soa.date_due }}</td>
+                                <td>{{ soa.status }}</td>    
+                                <th>{{ soa.progress }}</th>                        
+                                <td class="pull-right">
+                                    <a href="{% url 'soamgr:qppadmin_reviewsoa' soa.id %}" class="btn btn-primary">
+                                        Job Details
+                                    </a>
+                                </td>
+                                {% empty %}
+                                <td colspan="4">No data available</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+        
+        {% if soas_inprogress %}
+            <h2 class="sub-header">Soas in Progress</h2>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Client Name</th>
+                            <th>Soa Type</th>
+                            <th>Paraplanner</th>
+                            <th>Date Due</th>
+                            <th>Status</th>
+                            <th>Progress</th>
+                            <th class="pull-right">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for soa in soas_inprogress %}
+                            <tr>
+                                <td>{{ soa.id }}</td>
+                                <td>{{ soa.client_name }}</td>
+                                <td>{{ soa.soa_type }}</td>
+                                <td>{{ soa.paraplanner_approver }}</td>
+                                <td>{{ soa.date_due }}</td>
+                                <td>{{ soa.status }}</td>     
+                                <td>{{ soa.progress }}</td>                         
+                                <td class="pull-right">
+                                    <a href="{% url 'soamgr:qppadmin_orderapproval' soa.id %}" class="btn btn-primary">
+                                        Job Details
+                                    </a>
+                                </td>
+                                {% empty %}
+                                <td colspan="4">No data available</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+        
+        {% if soas_forreview %}
+            <h2 class="sub-header">Soas Ready for Review</h2>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Client Name</th>
+                            <th>Soa Type</th>
+                            <th>Paraplanner</th>
+                            <th>Date Due</th>
+                            <th>Status</th>
+                            <th>Progress</th>
+                            <th>Rating</th>
+                            <th class="pull-right">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for soa in soas_forreview %}
+                            <tr>
+                                <td>{{ soa.id }}</td>
+                                <td>{{ soa.client_name }}</td>
+                                <td>{{ soa.soa_type }}</td>
+                                <td>{{ soa.paraplanner_approver }}</td>
+                                <td>{{ soa.date_due }}</td>
+                                <td>{{ soa.status }}</td>     
+                                <td>{{ soa.progress }}</td>    
+                                <td>{{ soa.rating }}</td>                      
+                                <td class="pull-right">
+                                    <a href="{% url 'soamgr:qpp_review_order' soa.id %}" class="btn btn-primary">
+                                        Job Details
+                                    </a>
+                                </td>
+                                {% empty %}
+                                <td colspan="4">No data available</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+
+{% endblock content %}

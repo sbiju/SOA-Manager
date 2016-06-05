@@ -1,0 +1,68 @@
+{% extends "dashboard_adviser.html" %}
+{% load crispy_forms_tags %}
+{% block title %}Create Order{% endblock %}
+
+<script>
+$(document).ready(function(){
+{%block jquery%}
+
+{% endblock %}
+});
+
+</script>
+
+
+
+{% block content %}
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <form method="POST" action="">{% csrf_token %}
+        <div class="page-header">
+                <h1>Create Order</h1>
+        </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Order Form</h3>
+                            </div>
+                            <div class="panel-body" style="min-height: 10;">
+                                <!--button type="submit" class="btn btn-default pull-right">Previous Order</button><br/-->
+                                {{ form.client | as_crispy_field }}
+                                {{ form.partner_name | as_crispy_field }}
+                                {{ form.smsf | as_crispy_field }}
+                                {{ form.trust_fund | as_crispy_field }}
+                                {{ form.company | as_crispy_field }}
+                            </div>
+                        </div>
+                              <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Risk Profile</h3>
+                                </div>
+                                    <div class="panel-body" style="min-height: 10;">
+                                        {{ form.inside_super | as_crispy_field }}
+                                        {{ form.outside_super | as_crispy_field }}
+                                    </div>
+                              </div>
+                    </div>
+                        <div class="col-sm-5">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Type & Due</h3>
+                                </div>
+                                    <div class="panel-body" style="min-height: 10;">
+                                           {{ form.s_type | as_crispy_field }}
+                                           {{ form.due_date | as_crispy_field }}
+
+                                    </div>
+
+                            </div>
+                             <br/>
+                                <button type="submit" class="btn btn-success btn-block">Add Order</button>
+                        </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

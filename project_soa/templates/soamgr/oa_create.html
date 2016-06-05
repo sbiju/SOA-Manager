@@ -1,0 +1,44 @@
+{% extends "dashboard_adviser.html" %}
+
+{% block title %}Create Order{% endblock %}
+
+{% block content %}
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <form class="form-horizontal" method="post" action="{% url 'soamgr:oa_create' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="page-header"> 
+            <button type="submit" class="btn btn-success pull-right">Create</button>
+            <h1>Create Order</h1> 
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12 col-md-7">                    
+                        
+                    
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Order Agreement</h3>
+                        </div>
+                        <div class="panel-body" style="min-height: 10;">
+                            <h4>Basic Info</h4>
+                            {% include 'form_template.html' %}
+                            <h4>Strategies</h4>
+                            <p>No strategies added yet. The developers are still working on this feature.</p>
+                            </br>
+                            
+                            <h4>Goals</h4>
+                            <p>No goals added yet. The developers are still working on this feature.</p>
+                            </br>
+                            
+                            <h4>Files</h4>
+                            <p>No files added yet. The developers are still working on this feature.</p>
+                            </br>
+                        </div>
+                    </div>           
+                             
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

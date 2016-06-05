@@ -1,0 +1,45 @@
+{% extends 'dashboard_qpp.html' %}
+
+{% block content %}
+
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+        <form method="post" action="{% url 'soamgr:qppadmin_reviewsoa' soa.id %}">
+            {% csrf_token %}
+            <div class="page-header">                
+                <button type="submit" class="btn btn-primary pull-right">Submit</button>
+                <h1 >Review SOA</h1>
+            </div>
+            <div class="form-group row">
+                <h3 class="page-subheader col-sm-3">{{ soa.id }} | {{ soa.client_name }}</h3>
+            </div>
+        
+            <fieldset class="form-group">
+                <label for="exampleSelect1">SOA Type</label>
+                <select class="form-control" name="soa-type" value="{% if soa %}{{ soa.soa_type }}{% endif %}">
+                    {% for soa_type in soa_types %}
+                        <option value="{{ soa_type.id }}">{{ soa_type.type_name }} - ${{ soa_type.cost }}</option>
+                    {% endfor %}
+                </select>
+            </fieldset>
+        
+            <fieldset class="form-group">
+                <label for="exampleTextarea">Comments</label>
+                <textarea class="form-control" name="comments" rows="3">
+                    {% if soa %}{{ soa.comments }}{% endif %}
+                </textarea>
+            </fieldset>
+        
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="is-submit" {% if soa %}{% if soa.is_submitted %}checked=""{% endif %}{% endif %}> Send for adviser's approval?
+                </label>
+            </div>
+        
+            
+        
+        </form>
+        
+     </div>
+
+{% endblock content %}

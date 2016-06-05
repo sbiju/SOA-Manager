@@ -1,0 +1,23 @@
+{% extends 'dashboard_pp.html' %}
+
+{% block content %}
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <form method="post" action="{% url 'soamgr:paraplanner_claimjob' current_id %}">
+            {% csrf_token %}
+            <h1>Claim Job</h1>
+            <h6><strong>Client:</strong> {{ current_soa.client_name }}</h6>
+            <h6><strong>Date Created:</strong> {{ current_soa.date_created }}</h6>
+            <h6><strong>Due Date:</strong> {{ current_soa.date_due }}</h6>
+            <h6><strong>SOA Type:</strong> {{ current_soa.soa_type }}</h6>
+            <h6><strong>SOA Cost:</strong> {{ current_soa.cost }}</h6>
+            
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="is-claimed"> I confirm that I will complete this job before the due date
+                </label>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+{% endblock content %}

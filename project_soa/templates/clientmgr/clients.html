@@ -1,0 +1,61 @@
+{% extends "dashboard_adviser.html" %}
+
+{% block content %}
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">    
+    <div class="page-header">
+        <h1>Adviser Dashboard</h1>
+    </div>       
+    <div class="sub-header">        
+        <div class="btn-group pull-right">
+            <a href="{% url 'clientmgr:client_create' %}"> 
+                <button type="submit" class="btn btn-success">Add Client</button>
+            </a>
+            <a href="{% url 'clientmgr:partner_create' %}"> 
+                <button type="submit" class="btn btn-success">Add Partner</button>
+            </a>
+            <a href="{% url 'clientmgr:entity_create' %}"> 
+                <button type="submit" class="btn btn-success">Add Entity</button>
+            </a>
+        </div>  
+        <h2>Clients</h2>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Client ID</th>
+                    <th>Full Name</th>
+                    <!--
+                    <th>Has Partner</th>
+                    <th>Has Entity</th>
+                    -->
+                    <th>Details</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for client in clients %}
+                    <tr>
+                        <td>{{ client.pk }}</td>
+                        <td>{{ client.clientID }}</td>
+                        <td>{{ client.fullName }}</td>
+                        <td>                               
+                            <a href="{% url 'clientmgr:client_update' client.pk %}" class="btn btn-primary">
+                                Detail
+                            </a>
+                        </td>
+                        <td>                               
+                            <a href="{% url 'clientmgr:client_delete' client.pk %}" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-off" area-hidden="true"></span>
+                            </a>
+                        </td>
+                        {% empty %}
+                        <td colspan="4">You have no clients yet, please add one.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>        
+</div>
+{% endblock content %}
